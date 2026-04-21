@@ -30,3 +30,14 @@
 
 - `init` 실패: 조직·워크스페이스 이름, `terraform login` 토큰, 네트워크를 확인합니다.
 - `plan`/`apply` 권한 오류: IAM과 TFC 변수의 리전·계정이 일치하는지 확인합니다.
+
+## Bastion 경유 DB 접속 체크리스트
+
+- RDS 엔드포인트는 `host:port` 형태로 출력되므로, SSH 터널에서는 호스트와 포트를 분리해 사용합니다.
+- SSH 터널 예시: `ssh -i ~/.ssh/id_ed25519 -N -L 13306:<rds-host>:3306 ec2-user@<bastion-public-ip>`
+- DataGrip 사용 시: Host `127.0.0.1`, Port `13306`, User `admin`, Password는 Vault에 저장된 값으로 입력합니다.
+- CLI 사용 시 `mysql` 명령이 없으면 클라이언트를 먼저 설치합니다 (`sudo apt install mysql-client-core-8.0` 또는 `mariadb-client-core`).
+- 자주 보는 오류:
+  - `Permission denied (publickey)`: SSH 키 불일치 또는 Bastion SG의 허용 IP(`my_actual_ip`) 불일치
+  - `bind: Address already in use`: 로컬 포트 충돌(예: `13307`로 변경)
+  - `Access denied for user`: DB 사용자/비밀번호 불일치
