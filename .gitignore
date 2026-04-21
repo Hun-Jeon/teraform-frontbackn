@@ -13,3 +13,8 @@ terraform.rc
 
 # IDE
 .idea/
+
+# Local sensitive/generated files
+bastion-key
+bastion-key.pub
+output.json
