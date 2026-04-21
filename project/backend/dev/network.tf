@@ -41,6 +41,15 @@ resource "aws_subnet" "private_subnet" {
   }
 }
 
+# RDS를 위한 두 번째 프라이빗 서브넷 (다른 AZ: 2c)
+resource "aws_subnet" "private_subnet_2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.12.0/24"
+  availability_zone = "ap-northeast-2c"
+
+  tags = { Name = "dev-private-sn-2" }
+}
+
 # 5. 퍼블릭 라우팅 테이블 (외부로 나가는 길 안내판)
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main.id

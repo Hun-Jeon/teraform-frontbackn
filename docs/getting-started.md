@@ -16,16 +16,17 @@
 | 환경 | 메모 |
 | ---- | ---- |
 | Windows | PowerShell에서도 동일한 Terraform 명령을 사용합니다. 경로에 공백이 있으면 따옴표로 감싸세요. |
-| macOS | Homebrew 등으로 Terraform을 설치한 뒤, 터미널에서 이 저장소 루트로 이동합니다. |
+| macOS | Homebrew 등으로 Terraform을 설치한 뒤, 터미널에서 이 저장소의 환경 경로로 이동합니다. |
 | WSL2 | Linux 바이너리 기준으로 설치하면 됩니다. 저장소를 `/home/...` 쪽에 두면 I/O가 더 안정적인 경우가 많습니다. |
 
 자격 증명은 **저장소에 커밋하지 마세요.** 환경 변수·프로파일·TFC 변수로만 주입합니다.
 
 ## 첫 실행
 
-저장소 루트에서:
+`project/backend/dev`에서:
 
 ```bash
+cd project/backend/dev
 terraform init
 terraform fmt
 terraform validate
